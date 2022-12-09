@@ -45,12 +45,10 @@
 
 
 // function startActiveUser (activeUser) {
+//     // кликаем сами по подходящим юзерам
 //     for (let el = activeUser.length; el--;) {
 //         // console.log(activeUser[el]);
 //         activeUser[el].addEventListener('click', () => console.log('test'));
 //     } 
 // }
 // startActiveUser(argActiveUserId)
-
-
-// "run_at": "document_end"

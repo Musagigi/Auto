@@ -1,5 +1,5 @@
 function getTodayDate() {
-
+    // получаем сегодняшний день
     const dateInfo = {
         0: 'Январь',
         1: 'Февраль',
@@ -28,7 +28,7 @@ const argTodayDate = getTodayDate()
 
 
 function getOldDateRequest (date) {
- 
+    // собираем массив обращений, ДО сегодняшнего дня
     const usersTable = document.querySelector('.table.mb-0.table-borderless.task-table') // таблица Да
     let arrChildTag = []
     let needParentTag = {}
@@ -51,10 +51,9 @@ const argOldDateRequest = getOldDateRequest(argTodayDate)
 
 
 function clickOldDate(arrTag) {
-    
+    // кликаем по всем юзерам в массиве
     for (let elem of arrTag) {
-        // let test = elem.innerText ='test'
-        // elem.click() ? test: '' 
+        // elem.innerText ='test'
         elem.click()
     }
 }
