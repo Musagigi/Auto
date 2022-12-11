@@ -51,7 +51,7 @@ const argOldDateRequest = getOldDateRequest(argTodayDate)
 
 
 function clickOldDate(arrTag) {
-    // кликаем по всем юзерам в массиве
+    // кликает всем юзерам в массиве
     for (let elem of arrTag) {
         // elem.innerText ='test'
         elem.click()

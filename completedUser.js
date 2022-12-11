@@ -1,102 +1,58 @@
-function getUserId () { 
-    // получаем все id юзеров в таблице
-    let arrUserId = []
-    const userId = document.querySelectorAll('.pl-0.align-middle');
-    
-    for (let el of userId) {
-        arrUserId.push(el.innerText);
+const searchUserId = (domElem) => {
+    const arrId = []
+    for (let elem of domElem) {
+        arrId.push(elem.innerText)
     }
-    return [arrUserId, userId]
+    return arrId
 }
-const argUserId = getUserId()
-// console.log(argUserId);
+const workId = searchUserId(document.querySelectorAll('.resultBox'))
 
-// СДЕЛАТЬ 1 ФУНКЦИЮ И НА ЕЕ ОСНОВЕ СОЗДАВАТЬ ДВА МАССИВА
 
-function getWorkUserId () {
-    // получаем юзеров, которые успешно прошли Анализ
-    let arrWorkUserId = []
-    const workId = document.querySelectorAll('.resultBox')
-    
-    for (let el of workId) {
-        
-        if (el) {
-            arrWorkUserId.push(el.innerText)
+const clearUserId = (userId, workId) => {
+    const sameId = []
+    let elemText = ''
+
+    userId.forEach(element => {
+        elemText = element.innerText  
+        if (workId.includes(elemText)) {
+            sameId.push(element)
         }
-    }
-    return [arrWorkUserId, workId]
+    });
+    return sameId
 }
-const argWorkUserId = getWorkUserId()
-// console.log(argWorkUserId);
+const userId = document.querySelectorAll('.pl-0.align-middle')
+
+let clearArr = clearUserId(userId, workId)
 
 
-function getActiveUserId(userId, workUserId) {
-    let [usId, usIdSelector] = userId
-    let [wrkId, wrkIdSelector] = workUserId
-    let arrActiveUserId = []
-    let textEl
-    
-    usIdSelector.forEach(el => {
-        textEl = el.innerText
-        // console.log(textEl, el)
-        if (wrkId.includes(textEl)) {
-            arrActiveUserId.push(el)
-        }
-    })
-    // console.log(arrActiveUserId);
-    return arrActiveUserId
-}
-const argActiveUserId = getActiveUserId(argUserId, argWorkUserId)
-// console.log(argActiveUserId);
-
-// let newArr = []
-let test = 1
+// clearArr[0].click() это
+// setTimeout(() => clearArr[0].click(), 1000) или это
+// вместо этого, выше
 let event = new Event('click')
-function startActiveUser (activeUser) {
-    // кликаем сами по подходящим юзерам
-    // newArr = [...activeUser]
-    
-    for (let el = activeUser.length; el--;) {
-        
-        if ( test > 0) {
-            if (activeUser[el].dispatchEvent(event)) {
-                // activeUser[el].innerHTML ='<strong>TEST</strong>'
-                activeUser.pop()
-                // test--
-            }
-        }
-    }
-    // console.log(activeUser , 'innerArray');
+let el = clearArr[0] 
+if (el.dispatchEvent(event)) {
+    el.innerHTML ='<strong>TEST</strong>'
 }
-startActiveUser(argActiveUserId)
-// console.log(newArr, 'outArray');
+
+// Шаг 2 кликаем по всем кнопкам
+function btnClick (elem) {
+    elem.click()
+    elem.innerText = 'test'
+}
+
+function timerClick (btn, delay, btnClick) {
+    setTimeout(btnClick, delay, btn)
+}
+
+let delay = 2000
+const btn3 = document.querySelector('.dropdown-menu')
+
+timerClick(btn3.children[0], delay, btnClick)
+timerClick(btn3.children[1], delay + 1000, btnClick)
+timerClick(btn3.children[2], delay + 3000, btnClick)
+timerClick(btn3.children[3], delay + 3000, btnClick)
+timerClick(btn3.children[4], delay + 5500, btnClick)
 
 
-
-
-    // function startActiveUser (activeUser) {
-        // кликаем сами по подходящим юзерам
-        // let event = new Event('click')
-        // let test = 1
-        // for (let el of activeUser) {
-        //    
-            // if ( test > 0) {
-                // if (el.dispatchEvent(event) === 'true') {
-                    // el.innerHTML ='<strong>TEST</strong>'
-                    // test--
-                // }
-            // }
-        // }
-    // }
-    // startActiveUser(argActiveUserId)
-
-
-
-// Показательные клики
-    // function startActiveUser (activeUser) {
-        // кликаем сами по подходящим юзерам
-        // for (let el of activeUser) {
-            // el.innerHTML ='<strong>TEST</strong>'
-        // }
-    // }
-    // startActiveUser(argActiveUserId)
+// Шаг 3, делаем 2 клика назад (возвр. на главную)
+history.go(-2)
