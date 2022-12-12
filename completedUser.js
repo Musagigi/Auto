@@ -22,37 +22,46 @@ const clearUserId = (userId, workId) => {
 }
 const userId = document.querySelectorAll('.pl-0.align-middle')
 
+
 let clearArr = clearUserId(userId, workId)
+console.log(clearArr.length);
 
+let index = 0
+let clickInterval = setInterval(() => { 
+    
+    if (index === clearArr.length) {
+        clearInterval(clickInterval)        
+    } else {
+        // 1 клик 1 страница
+        clearArr[index].click()
+        index++
 
-// clearArr[0].click() это
-// setTimeout(() => clearArr[0].click(), 1000) или это
-// вместо этого, выше
-let event = new Event('click')
-let el = clearArr[0] 
-if (el.dispatchEvent(event)) {
-    el.innerHTML ='<strong>TEST</strong>'
-}
+        function timerClick (btn, delay = 1000) {
+            setTimeout(() => btn.click(), delay)
+        }
+   
+        // 2 страница 2 клика
+        setTimeout(() => {
+            let btn1 = document.querySelector('.d-flex.align-self-center').children[2]
+            timerClick(btn1, 3000)
+            timerClick(btn1, 4000)
+        }, 1000)
 
-// Шаг 2 кликаем по всем кнопкам
-function btnClick (elem) {
-    elem.click()
-    elem.innerText = 'test'
-}
+         // 3 страница 2 клика
+        setTimeout(() => {
+            let doubleClick = document.querySelectorAll('#signButton')
+            timerClick(doubleClick[0])
+            timerClick(doubleClick[1])
+        }, 8000)
+    
+         // 3 страница 1 клик (сохранить все)
+        setTimeout(() => {
+            let btn3= document.querySelector('.btn.btn-primary.mt-3')
+            timerClick(btn3)
+        }, 15000)
 
-function timerClick (btn, delay, btnClick) {
-    setTimeout(btnClick, delay, btn)
-}
+        setTimeout(() => history.go(-2), 18000)
 
-let delay = 2000
-const btn3 = document.querySelector('.dropdown-menu')
+    }
 
-timerClick(btn3.children[0], delay, btnClick)
-timerClick(btn3.children[1], delay + 1000, btnClick)
-timerClick(btn3.children[2], delay + 3000, btnClick)
-timerClick(btn3.children[3], delay + 3000, btnClick)
-timerClick(btn3.children[4], delay + 5500, btnClick)
-
-
-// Шаг 3, делаем 2 клика назад (возвр. на главную)
-history.go(-2)
+}, 20000)

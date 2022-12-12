@@ -1,63 +1,73 @@
-// function getUserId () { 
-//     let arrUserId = []
-//     const userId = document.querySelectorAll('.pl-0.align-middle');
+const searchUserId = (domElem) => {
+    const arrId = []
+    for (let elem of domElem) {
+        arrId.push(elem.innerText)
+    }
+    return arrId
+}
+const workId = searchUserId(document.querySelectorAll('.resultBox'))
+
+
+const clearUserId = (userId, workId) => {
+    const sameId = []
+    let elemText = ''
+
+    userId.forEach(element => {
+        elemText = element.innerText  
+        if (workId.includes(elemText)) {
+            sameId.push(element)
+        }
+    });
+    return sameId
+}
+const userId = document.querySelectorAll('.pl-0.align-middle')
+
+let clearArr = clearUserId(userId, workId)
+// console.log(clearArr.length);
+// 1 страница
+// clearArr[0].click()
+const dropMenu = document.querySelector('.dropdown-menu')
+
+
+let index = 0
+let clickInterval = setInterval(() => {
+    // 2 клика на 2 странице 
+    if (index === clearArr.length) {
+        clearInterval(clickInterval)        
+    } else {
+        function timerClick (btn, delay = 1000) {
+            setTimeout(() => btn.innerText = index, delay)
+        }
+        console.log(index, 'test1')
+        console.log(clearArr[index])
+        clearArr[index].innerText = 'TEST'
+        index++
+        console.log(index, 'test2')
+        // 2 страница 2 клика
+        setTimeout(() => {
+            let btn1 = dropMenu.children[0]
+            timerClick(btn1, 1500)
+            timerClick(btn1, 2800)
+        })
     
-//     for (let elem of userId) {
-//         arrUserId.push(elem.innerText);
-//     }
-//     return [arrUserId, userId]
-// }
-// const argUserId = getUserId()
-
-
-// function getWorkUserId () {
-//     let arrWorkUserId = []
-//     const workId = document.querySelectorAll('.resultBox')
+        setTimeout(() => {
+            let doubleClick = dropMenu.children[1]
+            let doubleClick2 = dropMenu.children[2]
+            timerClick(doubleClick)
+            timerClick(doubleClick2)
+        }, 5000)
     
-//     for (let elem of workId) {
-        
-//         if (elem) {
-//             arrWorkUserId.push(elem.innerText)
-//         }
-//     }
-//     return [arrWorkUserId, workId]
-// }
-// const argWorkUserId = getWorkUserId()
+        setTimeout(() => {
+            let btn3= dropMenu.children[3]
+            timerClick(btn3)
+        }, 9000)
+        setTimeout(() => history.go(-2), 11000)
+    }
+    // if (index === clearArr.length) {
+    //     clearInterval(clickInterval)
+    // }    
+}, 20000)
 
 
-// function getActiveUserId(userId, workUserId) {
-//     let [usId, usIdSelector] = userId
-//     let [wrkId, wrkIdSelector] = workUserId
-//     let arrActiveUserId = []
-//     let textEl
-    
-//     usIdSelector.forEach(el => {
-//         textEl = el.innerText
-//         // console.log(textEl, el)
-//         if (wrkId.includes(textEl)) {
-//             arrActiveUserId.push(el)
-//         }
-//     })
-//     // console.log(arrActiveUserId);
-//     return arrActiveUserId
-// }
-// const argActiveUserId = getActiveUserId(argUserId, argWorkUserId)
 
 
-// function startActiveUser (activeUser) {
-//     // кликаем сами по подходящим юзерам
-//     for (let el = activeUser.length; el--;) {
-//         // console.log(activeUser[el]);
-//         activeUser[el].addEventListener('click', () => console.log('test'));
-//     } 
-// }
-// startActiveUser(argActiveUserId)
-
-
-// let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-// const te = 0
-// const test = arr.filter(el => {
-    // te = el % 2
-    // return te === 0
-// });
-// console.log(test);
