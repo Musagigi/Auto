@@ -22,11 +22,13 @@ const clearUserId = (userId, workId) => {
 }
 const userId = document.querySelectorAll('.pl-0.align-middle')
 
-
 let clearArr = clearUserId(userId, workId)
-console.log(clearArr.length);
 
+console.log('Всего:', clearArr.length);
+
+let count = clearArr.length
 let index = 0
+
 let clickInterval = setInterval(() => { 
     
     if (index === clearArr.length) {
@@ -43,8 +45,8 @@ let clickInterval = setInterval(() => {
         // 2 страница 2 клика
         setTimeout(() => {
             let btn1 = document.querySelector('.d-flex.align-self-center').children[2]
-            timerClick(btn1, 3000)
-            timerClick(btn1, 4000)
+            timerClick(btn1, 1500)
+            timerClick(btn1, 3800)
         }, 1000)
 
          // 3 страница 2 клика
@@ -52,15 +54,18 @@ let clickInterval = setInterval(() => {
             let doubleClick = document.querySelectorAll('#signButton')
             timerClick(doubleClick[0])
             timerClick(doubleClick[1])
-        }, 8000)
+        }, 7900)
     
          // 3 страница 1 клик (сохранить все)
         setTimeout(() => {
             let btn3= document.querySelector('.btn.btn-primary.mt-3')
             timerClick(btn3)
-        }, 15000)
+        }, 12500)
 
-        setTimeout(() => history.go(-2), 18000)
+        setTimeout(() => {
+            history.go(-2)
+            console.log('Осталось', --count);
+        }, 14000)
 
     }
 
